@@ -24,7 +24,7 @@ class TagForm(forms.ModelForm):
 
 class PostForm(forms.ModelForm):
     class Meta:
-        medel = Post
+        model = Post
         fields = ['title', 'slug', 'body', 'tags']
 
         widgets = {
