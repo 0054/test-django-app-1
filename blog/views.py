@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import View
 
 from .models import Post, Tag
-from .utils import ObjectDetailMixin, ObjectCreateMixin
+from .utils import *
 from .forms import TagForm, PostForm
 
 
@@ -33,19 +33,12 @@ class TagCreate(ObjectCreateMixin, View):
     form_model = TagForm
     template = 'blog/tag_create.html'
 
-class TagUpdate(View):
-    def get(self, request, slug):
-        tag = Tag.objects.get(slug__iexact=slug)
-        bound_form = TagForm(instance=tag)
-        return render(request, 'blog/tag_update.html', context={'form': bound_form, 'tag': tag})
+class TagUpdate(ObjectUpdateMixin, View):
+    model = Tag
+    form_model = TagForm
+    template = 'blog/tag_update.html'
 
-    def post(self, request, slug):
-        tag = Tag.objects.get(slug__iexact=slug)
-        bound_form = TagForm(request.POST, instance=tag)
-        if bound_form.is_valid():
-            new_tag = bound_form.save()
-            return redirect(new_tag)
-
-        return render(request, 'blog/tag_update.html', context={'form': bound_form, 'tag': tag})
-
-
+class PostUpdate(ObjectUpdateMixin, View):
+    model = Post
+    form_model = PostForm
+    template = 'blog/post_update.html'
