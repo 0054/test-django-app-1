@@ -9,8 +9,12 @@ class ObjectDetailMixin:
     model = None
     template = None
     def  get(self, request, slug):
-        obj = get_object_or_404(self.model, slug__iexact=slug)
-        return render(request, self.template, context={self.model.__name__.lower(): obj})
+        object = get_object_or_404(self.model, slug__iexact=slug)
+        return render(request,
+                      self.template,
+                      context={self.model.__name__.lower(): object,
+                      'admin_object': object,
+                      'detail': True})
 
 
 class ObjectCreateMixin:
@@ -52,7 +56,7 @@ class ObjectUpdateMixin:
 class ObjectDeleteMixin:
     model = None
     template = None
-    redirect_template = None
+    redirect_url = None
 
     def get(self, request, slug):
         object = self.model.objects.get(slug__iexact=slug)
@@ -61,4 +65,4 @@ class ObjectDeleteMixin:
     def post(self, request, slug):
         object = self.model.objects.get(slug__iexact=slug)
         object.delete()
-        return redirect(reverse(self.redirect_template))
+        return redirect(reverse(self.redirect_url))
