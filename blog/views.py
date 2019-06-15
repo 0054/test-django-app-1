@@ -20,14 +20,29 @@ class PostDetail(ObjectDetailMixin, View):
     template = 'blog/post_detail.html'
     model = Post
 
-class TagDetail(ObjectDetailMixin, View):
-    template = 'blog/tag_detail.html'
-    model = Tag
-
+class PostUpdate(ObjectUpdateMixin, View):
+    model = Post
+    form_model = PostForm
+    template = 'blog/post_update.html'
 
 class PostCreate(ObjectCreateMixin, View):
     form_model = PostForm
     template = 'blog/post_create.html' 
+
+class TagDetail(ObjectDetailMixin, View):
+    template = 'blog/tag_detail.html'
+    model = Tag
+
+class PostDelete(ObjectDeleteMixin, View):
+    model = Post
+    template = 'blog/post_delete.html'
+    redirect_template = 'posts_list_url'
+
+class TagDelete(ObjectDeleteMixin, View):
+    model = Tag
+    template = 'blog/tag_delete.html'
+    redirect_template = 'tags_list_url'
+
 
 class TagCreate(ObjectCreateMixin, View):
     form_model = TagForm
@@ -37,8 +52,3 @@ class TagUpdate(ObjectUpdateMixin, View):
     model = Tag
     form_model = TagForm
     template = 'blog/tag_update.html'
-
-class PostUpdate(ObjectUpdateMixin, View):
-    model = Post
-    form_model = PostForm
-    template = 'blog/post_update.html'
