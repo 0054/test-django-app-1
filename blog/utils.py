@@ -66,3 +66,10 @@ class ObjectDeleteMixin:
         object = self.model.objects.get(slug__iexact=slug)
         object.delete()
         return redirect(reverse(self.redirect_url))
+
+
+
+
+    # <!-- <h3> -->
+    # <!--         <a href="{{ tag.get_absolute_url }}">{{ tag.title }}</a> -->
+    # <!-- </h3> -->

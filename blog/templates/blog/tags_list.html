@@ -5,11 +5,11 @@
 {% endblock %}
 {% block content %}
 <h1 class="bm-5">
-    Tags
+    Tags:
 </h1>
     {% for tag in tags %}
-    <h3>
-            <a href="{{ tag.get_absolute_url }}">{{ tag.title }}</a>
-    </h3>
+    <a href="{{ tag.get_absolute_url }}">
+        <h2>{{ tag.title }}</h3>
+    </a>
     {% endfor %}
 {% endblock %}

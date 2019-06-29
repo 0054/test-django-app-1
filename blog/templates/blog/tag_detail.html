@@ -6,9 +6,9 @@
 
 {% block content %}
     <h1 class="mt-5">
-        {{ tag.title }}
+        Posts with "{{ tag.title }}" tag:
     </h1>
     {% for post in tag.posts.all %}
-    <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
+    {% include "blog/includes/post_card_template.html" %}
     {% endfor %}
 {% endblock %}
